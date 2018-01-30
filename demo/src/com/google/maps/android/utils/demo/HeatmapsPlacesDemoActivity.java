@@ -63,7 +63,7 @@ public class HeatmapsPlacesDemoActivity extends BaseDemoActivity {
 
     private GoogleMap mMap = null;
 
-    private final LatLng SYDNEY = new LatLng(-33.873651, 151.2058896);
+    private final LatLng THIS_LOCATION = new LatLng(-33.873651, 151.2058896);
 
     /**
      * The base URL for the radar search request.
@@ -79,7 +79,7 @@ public class HeatmapsPlacesDemoActivity extends BaseDemoActivity {
     /**
      * Places API server key.
      */
-    private static final String API_KEY = "YOUR_KEY_HERE"; // TODO place your own here!
+    private static final String API_KEY = "AIzaSyBZ0NoEmJjxblB5Nq0jEDEp3BgpuCKKZ1Y"; // TODO place your own here!
 
     /**
      * The colors to be used for the different heatmap layers.
@@ -111,7 +111,7 @@ public class HeatmapsPlacesDemoActivity extends BaseDemoActivity {
      * The search radius which roughly corresponds to the radius of the results
      * from the radar search in meters.
      */
-    public static final int SEARCH_RADIUS = 8000;
+    public static final int SEARCH_RADIUS = 100;
 
     /**
      * Stores the TileOverlay corresponding to each of the keywords that have been searched for.
@@ -161,10 +161,10 @@ public class HeatmapsPlacesDemoActivity extends BaseDemoActivity {
         if (mMap == null) {
             mMap = getMap();
             if (mMap != null) {
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SYDNEY, 11));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(THIS_LOCATION, 11));
                 // Add a circle around Sydney to roughly encompass the results
                 mMap.addCircle(new CircleOptions()
-                    .center(SYDNEY)
+                    .center(THIS_LOCATION)
                     .radius(SEARCH_RADIUS * 1.2)
                     .strokeColor(Color.RED)
                     .strokeWidth(4));
@@ -216,7 +216,7 @@ public class HeatmapsPlacesDemoActivity extends BaseDemoActivity {
         //   so that four searches can be done.
         ArrayList<LatLng> searchCenters = new ArrayList<LatLng>(4);
         for (int heading = 45; heading < 360; heading += 90) {
-            searchCenters.add(SphericalUtil.computeOffset(SYDNEY, SEARCH_RADIUS / 2, heading));
+            searchCenters.add(SphericalUtil.computeOffset(THIS_LOCATION, SEARCH_RADIUS / 2, heading));
         }
 
         for (int j = 0; j < 4; j++) {
